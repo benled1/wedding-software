@@ -13,9 +13,6 @@
     --accent-coral: #e07860;
     --accent-mustard: #d4a847;
     --accent-sage: #8fa882;
-    --washi-pink: rgba(232, 180, 180, 0.7);
-    --washi-blue: rgba(173, 198, 214, 0.7);
-    --washi-yellow: rgba(240, 220, 160, 0.7);
     --shadow-color: rgba(45, 42, 38, 0.3);
 
     /* Fonts */
@@ -94,55 +91,6 @@ body::after {
 }
 
 /* ==========================================================================
-   Bird Decorations
-   ========================================================================== */
-
-.bird {
-    position: absolute;
-    pointer-events: none;
-    z-index: 60;
-}
-
-.bird-1 {
-    top: 8%;
-    left: 12%;
-    font-size: 2.5rem;
-    transform: rotate(-15deg);
-    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2));
-}
-
-.bird-2 {
-    top: 15%;
-    right: 8%;
-    font-size: 2rem;
-    transform: rotate(10deg) scaleX(-1);
-    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2));
-}
-
-.bird-3 {
-    bottom: 20%;
-    left: 8%;
-    font-size: 1.8rem;
-    transform: rotate(-5deg);
-    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2));
-}
-
-.bird-4 {
-    bottom: 25%;
-    right: 12%;
-    font-size: 2.2rem;
-    transform: rotate(8deg) scaleX(-1);
-    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2));
-}
-
-/* Bird doodle style - hand drawn look */
-.bird-doodle {
-    font-family: var(--font-handwritten);
-    color: var(--text-muted);
-    opacity: 0.6;
-}
-
-/* ==========================================================================
    Collage Hero Section
    ========================================================================== */
 
@@ -169,7 +117,8 @@ body::after {
 
 .photo {
     position: absolute;
-    background: transparent;
+    background: white;
+    padding: 12px 12px 35px 12px; /* Larger bottom padding like a polaroid/magazine clipping */
     transition: transform 0.4s ease, filter 0.4s ease;
     cursor: pointer;
     /* Torn paper edge - irregular polygon */
@@ -189,7 +138,7 @@ body::after {
 .photo img {
     display: block;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 23px); /* Account for extra bottom padding */
     object-fit: cover;
     /* Slight vintage/magazine print feel */
     filter: contrast(1.05) saturate(0.95);
@@ -199,70 +148,6 @@ body::after {
     transform: scale(1.08) rotate(0deg) !important;
     filter: drop-shadow(8px 12px 16px rgba(0,0,0,0.4));
     z-index: 100;
-}
-
-/* Washi tape strips on photos */
-.photo::before {
-    content: '';
-    position: absolute;
-    width: 70px;
-    height: 22px;
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%) rotate(-3deg);
-    z-index: 10;
-    opacity: 0.85;
-}
-
-.photo-1::before {
-    background: var(--washi-pink);
-    width: 80px;
-    transform: translateX(-50%) rotate(5deg);
-}
-
-.photo-2::before {
-    background: var(--washi-blue);
-    transform: translateX(-50%) rotate(-7deg);
-}
-
-.photo-3::before {
-    background: var(--washi-yellow);
-    width: 75px;
-    transform: translateX(-50%) rotate(2deg);
-}
-
-.photo-4::before {
-    background: var(--washi-pink);
-    transform: translateX(-50%) rotate(-4deg);
-}
-
-.photo-5::before {
-    background: var(--washi-blue);
-    width: 85px;
-    transform: translateX(-50%) rotate(6deg);
-}
-
-/* Second tape strip for some photos */
-.photo-1::after,
-.photo-3::after {
-    content: '';
-    position: absolute;
-    width: 60px;
-    height: 20px;
-    bottom: -6px;
-    right: 10%;
-    z-index: 10;
-    opacity: 0.8;
-    transform: rotate(8deg);
-}
-
-.photo-1::after {
-    background: var(--washi-yellow);
-}
-
-.photo-3::after {
-    background: var(--washi-pink);
-    transform: rotate(-5deg);
 }
 
 /* Individual Photo Positions - Desktop */
@@ -338,33 +223,6 @@ body::after {
     filter: drop-shadow(5px 8px 15px rgba(0,0,0,0.25));
 }
 
-/* Decorative washi tape on card corners */
-.text-card::before {
-    content: '';
-    position: absolute;
-    width: 90px;
-    height: 24px;
-    top: 15px;
-    left: -20px;
-    background: var(--washi-yellow);
-    transform: rotate(-35deg);
-    opacity: 0.8;
-    z-index: -1;
-}
-
-.text-card::after {
-    content: '';
-    position: absolute;
-    width: 85px;
-    height: 22px;
-    bottom: 20px;
-    right: -15px;
-    background: var(--washi-pink);
-    transform: rotate(30deg);
-    opacity: 0.8;
-    z-index: -1;
-}
-
 .save-the-date-label {
     font-family: var(--font-handwritten);
     font-size: 1.6rem;
@@ -426,17 +284,6 @@ body::after {
     padding: 50px 20px;
     margin-top: 30px;
     position: relative;
-}
-
-/* Bird decoration near countdown */
-.countdown-section::before {
-    content: '🐦';
-    position: absolute;
-    top: 10px;
-    right: 15%;
-    font-size: 1.5rem;
-    transform: rotate(-10deg);
-    opacity: 0.7;
 }
 
 .countdown-label {
@@ -575,7 +422,7 @@ body::after {
 }
 
 .calendar-option:hover {
-    background: var(--washi-yellow);
+    background: rgba(212, 168, 71, 0.2); /* Subtle mustard highlight */
 }
 
 /* ==========================================================================
@@ -587,27 +434,6 @@ body::after {
     padding: 50px 20px;
     margin-top: 30px;
     position: relative;
-}
-
-/* Bird decorations in footer */
-.footer::before {
-    content: '🕊️';
-    position: absolute;
-    top: 20px;
-    left: 20%;
-    font-size: 1.8rem;
-    transform: rotate(-5deg);
-    opacity: 0.6;
-}
-
-.footer::after {
-    content: '🕊️';
-    position: absolute;
-    top: 15px;
-    right: 22%;
-    font-size: 1.6rem;
-    transform: rotate(8deg) scaleX(-1);
-    opacity: 0.6;
 }
 
 .formal-invite {
@@ -677,10 +503,6 @@ body::after {
 
     .date-text {
         font-size: 1.6rem;
-    }
-
-    .bird-1, .bird-2, .bird-3, .bird-4 {
-        display: none;
     }
 }
 
@@ -765,10 +587,6 @@ body::after {
     }
 }
 
-@keyframes flutter {
-    0%, 100% { transform: translateY(0) rotate(-5deg); }
-    50% { transform: translateY(-5px) rotate(5deg); }
-}
 
 .text-card {
     animation: fadeInScatter 0.8s ease-out;
@@ -792,11 +610,3 @@ body::after {
 .countdown-item:nth-child(2) { animation-delay: 0.45s; }
 .countdown-item:nth-child(3) { animation-delay: 0.5s; }
 .countdown-item:nth-child(4) { animation-delay: 0.55s; }
-
-.bird {
-    animation: flutter 3s ease-in-out infinite;
-}
-
-.bird-2 { animation-delay: 0.5s; }
-.bird-3 { animation-delay: 1s; }
-.bird-4 { animation-delay: 1.5s; }
