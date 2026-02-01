@@ -10,6 +10,18 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+    <!-- Parallax Background Layers -->
+    <div class="parallax-container">
+        <!-- Sky gradient (static) -->
+        <div class="parallax-layer parallax-sky"></div>
+        <!-- Far mountains (slowest) -->
+        <div class="parallax-layer parallax-bg" data-speed="0.2"></div>
+        <!-- Mid hills -->
+        <div class="parallax-layer parallax-mid" data-speed="0.4"></div>
+        <!-- Foreground trees/landscape (fastest) -->
+        <div class="parallax-layer parallax-fg" data-speed="0.6"></div>
+    </div>
+
     <div class="page-container">
         <!-- Paper Collage Hero -->
         <section class="collage-hero">
@@ -79,7 +91,6 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p class="formal-invite">Formal invitation to follow</p>
         </footer>
     </div>
 

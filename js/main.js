@@ -179,4 +179,45 @@ document.addEventListener('DOMContentLoaded', function() {
         window.open(generateOutlookUrl(), '_blank');
         calendarDropdown.classList.remove('active');
     });
+
+    // Initialize parallax
+    initParallax();
 });
+
+// ==========================================================================
+// Parallax Background
+// ==========================================================================
+
+function initParallax() {
+    const layers = document.querySelectorAll('.parallax-layer[data-speed]');
+
+    if (layers.length === 0) return;
+
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    let ticking = false;
+
+    function updateParallax() {
+        const scrollY = window.pageYOffset;
+
+        layers.forEach(layer => {
+            const speed = parseFloat(layer.dataset.speed) || 0.5;
+            const yPos = -(scrollY * speed);
+            layer.style.transform = `translate3d(0, ${yPos}px, 0)`;
+        });
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    });
+
+    // Initial position
+    updateParallax();
+}

@@ -36,42 +36,74 @@ html {
 
 body {
     font-family: var(--font-elegant);
-    background-color: var(--paper-bg);
+    background-color: #87CEEB; /* Sky blue fallback */
     color: var(--text-dark);
     min-height: 100vh;
     line-height: 1.6;
     overflow-x: hidden;
 }
 
-/* Kraft paper texture background */
-body::before {
-    content: '';
+/* ==========================================================================
+   Parallax Background Layers
+   ========================================================================== */
+
+.parallax-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none;
-    background:
-        repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(0,0,0,0.01) 2px,
-            rgba(0,0,0,0.01) 4px
-        ),
-        repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 2px,
-            rgba(0,0,0,0.01) 2px,
-            rgba(0,0,0,0.01) 4px
-        );
-    opacity: 0.5;
+    z-index: -1;
+    overflow: hidden;
 }
 
-/* Paper grain overlay */
-body::after {
+.parallax-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: repeat-x;
+    background-position: bottom center;
+    will-change: transform;
+}
+
+/* Sky gradient - static background */
+.parallax-sky {
+    background: linear-gradient(
+        to bottom,
+        #a8d4e6 0%,      /* Soft blue at top */
+        #d4e8f2 30%,     /* Lighter blue */
+        #f0e6d3 60%,     /* Warm cream/peach */
+        #f5dcc4 80%,     /* Peachy horizon */
+        #e8d4c4 100%     /* Warm base */
+    );
+}
+
+/* Far hills - darkest, slowest moving, puffy cloud-like hills */
+.parallax-bg {
+    bottom: 0;
+    height: 55%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300' preserveAspectRatio='none'%3E%3Cpath fill='%235a7a6a' d='M0,300 L0,160 Q150,100 300,140 Q450,180 600,120 Q750,60 900,120 Q1050,180 1200,160 L1200,300 Z'/%3E%3C/svg%3E");
+    background-size: 1200px 100%;
+}
+
+/* Mid hills - medium tone, puffy rolling hills */
+.parallax-mid {
+    bottom: 0;
+    height: 40%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 250' preserveAspectRatio='none'%3E%3Cpath fill='%237a9a7a' d='M0,250 L0,140 Q125,80 250,120 Q375,160 500,100 Q625,40 750,100 Q875,160 1000,140 L1000,250 Z'/%3E%3C/svg%3E");
+    background-size: 1000px 100%;
+}
+
+/* Foreground hills - lightest, fastest, soft puffy hills */
+.parallax-fg {
+    bottom: 0;
+    height: 28%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 200' preserveAspectRatio='none'%3E%3Cpath fill='%238faa82' d='M0,200 L0,110 Q100,60 200,100 Q300,140 400,80 Q500,20 600,80 Q700,140 800,110 L800,200 Z'/%3E%3C/svg%3E");
+    background-size: 800px 100%;
+}
+
+/* Paper texture overlay on top of parallax */
+.page-container::before {
     content: '';
     position: fixed;
     top: 0;
@@ -79,7 +111,8 @@ body::after {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    opacity: 0.08;
+    z-index: -1;
+    opacity: 0.03;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
@@ -181,8 +214,8 @@ body::after {
 .photo-4 {
     width: 210px;
     height: 270px;
-    bottom: 8%;
-    right: 4%;
+    bottom: 10%;
+    right: 12%;
     transform: rotate(-9deg);
     z-index: 1;
 }
