@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500" viewBox="0 0 400 500">
+  <rect fill="#e2dacf" width="400" height="500"/>
+  <rect fill="#cec6bb" x="50" y="50" width="300" height="400" rx="5"/>
+  <circle fill="#bfb7ac" cx="200" cy="200" r="60"/>
+  <circle fill="#afa79c" cx="180" cy="185" r="8"/>
+  <circle fill="#afa79c" cx="220" cy="185" r="8"/>
+  <path fill="none" stroke="#afa79c" stroke-width="3" d="M175 220 Q200 240 225 220"/>
+  <text x="200" y="320" font-family="Georgia, serif" font-size="18" fill="#8b7d6b" text-anchor="middle">Photo 5</text>
+  <text x="200" y="350" font-family="Georgia, serif" font-size="14" fill="#a69585" text-anchor="middle">Replace with your image</text>
+</svg>

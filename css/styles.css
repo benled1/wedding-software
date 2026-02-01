@@ -1,0 +1,548 @@
+/* ==========================================================================
+   Save the Date - Paper Collage Style
+   ========================================================================== */
+
+/* CSS Variables for easy customization */
+:root {
+    /* Colors */
+    --paper-bg: #f5f0e6;
+    --paper-light: #faf8f3;
+    --text-dark: #3d3830;
+    --text-muted: #6b6459;
+    --accent-gold: #c4a86b;
+    --shadow-color: rgba(61, 56, 48, 0.25);
+
+    /* Fonts */
+    --font-handwritten: 'Caveat', cursive;
+    --font-elegant: 'Cormorant Garamond', serif;
+
+    /* Photo styling */
+    --photo-border: 8px;
+    --photo-shadow: 0 4px 20px var(--shadow-color);
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-elegant);
+    background-color: var(--paper-bg);
+    color: var(--text-dark);
+    min-height: 100vh;
+    line-height: 1.6;
+
+    /* Paper texture background - replace with jpg/png for better texture */
+    background-image: url('../assets/textures/paper-bg.svg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+/* Fallback grain texture if no image */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    position: relative;
+}
+
+/* ==========================================================================
+   Collage Hero Section
+   ========================================================================== */
+
+.collage-hero {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+}
+
+.collage-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+/* Base Photo Styles */
+.photo {
+    position: absolute;
+    background: var(--paper-light);
+    padding: var(--photo-border);
+    box-shadow: var(--photo-shadow);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+}
+
+.photo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid rgba(0,0,0,0.05);
+    pointer-events: none;
+}
+
+.photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo:hover {
+    transform: scale(1.05) rotate(0deg) !important;
+    box-shadow: 0 8px 40px var(--shadow-color);
+    z-index: 100;
+}
+
+/* Individual Photo Positions - Desktop */
+.photo-1 {
+    width: 280px;
+    height: 350px;
+    top: 5%;
+    left: 5%;
+    transform: rotate(-8deg);
+    z-index: 1;
+}
+
+.photo-2 {
+    width: 240px;
+    height: 300px;
+    top: 10%;
+    right: 10%;
+    transform: rotate(5deg);
+    z-index: 2;
+}
+
+.photo-3 {
+    width: 260px;
+    height: 320px;
+    bottom: 15%;
+    left: 15%;
+    transform: rotate(-3deg);
+    z-index: 3;
+}
+
+.photo-4 {
+    width: 220px;
+    height: 280px;
+    bottom: 10%;
+    right: 5%;
+    transform: rotate(7deg);
+    z-index: 2;
+}
+
+.photo-5 {
+    width: 200px;
+    height: 250px;
+    top: 35%;
+    left: 45%;
+    transform: rotate(-5deg) translateX(-50%);
+    z-index: 1;
+}
+
+/* Optional: Tape strips decoration */
+.photo.with-tape::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 20px;
+    background: rgba(255, 248, 220, 0.7);
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* ==========================================================================
+   Text Card Overlay
+   ========================================================================== */
+
+.text-card {
+    position: relative;
+    z-index: 50;
+    background: rgba(250, 248, 243, 0.95);
+    padding: 50px 60px;
+    text-align: center;
+    box-shadow: 0 10px 50px var(--shadow-color);
+    max-width: 500px;
+
+    /* Torn paper edge effect */
+    clip-path: polygon(
+        0% 2%, 3% 0%, 7% 1%, 12% 0%, 18% 2%, 25% 0%, 32% 1%,
+        40% 0%, 48% 2%, 55% 0%, 62% 1%, 70% 0%, 78% 2%, 85% 0%,
+        92% 1%, 97% 0%, 100% 2%, 100% 98%, 97% 100%, 92% 99%,
+        85% 100%, 78% 98%, 70% 100%, 62% 99%, 55% 100%, 48% 98%,
+        40% 100%, 32% 99%, 25% 100%, 18% 98%, 12% 100%, 7% 99%,
+        3% 100%, 0% 98%
+    );
+}
+
+.save-the-date-label {
+    font-family: var(--font-handwritten);
+    font-size: 1.8rem;
+    color: var(--accent-gold);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.couple-names {
+    font-family: var(--font-handwritten);
+    font-size: 4rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.wedding-date {
+    margin: 25px 0;
+}
+
+.date-text {
+    font-family: var(--font-elegant);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.location {
+    font-family: var(--font-elegant);
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Countdown Section
+   ========================================================================== */
+
+.countdown-section {
+    text-align: center;
+    padding: 60px 20px;
+    margin-top: 40px;
+}
+
+.countdown-label {
+    font-family: var(--font-handwritten);
+    font-size: 2rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    background: var(--paper-light);
+    padding: 25px 30px;
+    min-width: 100px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transform: rotate(-1deg);
+}
+
+.countdown-item:nth-child(2) {
+    transform: rotate(1deg);
+}
+
+.countdown-item:nth-child(3) {
+    transform: rotate(-0.5deg);
+}
+
+.countdown-item:nth-child(4) {
+    transform: rotate(0.8deg);
+}
+
+.countdown-number {
+    display: block;
+    font-family: var(--font-handwritten);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1;
+}
+
+.countdown-unit {
+    display: block;
+    font-family: var(--font-elegant);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 8px;
+}
+
+/* ==========================================================================
+   Calendar Section
+   ========================================================================== */
+
+.calendar-section {
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+}
+
+.calendar-btn {
+    font-family: var(--font-handwritten);
+    font-size: 1.5rem;
+    background: var(--paper-light);
+    border: none;
+    padding: 18px 40px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-dark);
+    transform: rotate(-1deg);
+}
+
+.calendar-btn:hover {
+    transform: rotate(0deg) translateY(-3px);
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+.calendar-icon {
+    font-size: 1.3rem;
+}
+
+.calendar-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--paper-light);
+    box-shadow: 0 4px 20px var(--shadow-color);
+    display: none;
+    flex-direction: column;
+    min-width: 200px;
+    z-index: 100;
+    margin-top: 10px;
+}
+
+.calendar-dropdown.active {
+    display: flex;
+}
+
+.calendar-option {
+    font-family: var(--font-elegant);
+    font-size: 1.1rem;
+    padding: 15px 25px;
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: background 0.2s ease;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.calendar-option:last-child {
+    border-bottom: none;
+}
+
+.calendar-option:hover {
+    background: rgba(196, 168, 107, 0.1);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.footer {
+    text-align: center;
+    padding: 60px 20px;
+    margin-top: 40px;
+}
+
+.formal-invite {
+    font-family: var(--font-elegant);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+}
+
+.hashtag {
+    font-family: var(--font-handwritten);
+    font-size: 1.8rem;
+    color: var(--accent-gold);
+}
+
+/* ==========================================================================
+   Responsive Styles
+   ========================================================================== */
+
+@media (max-width: 900px) {
+    .collage-hero {
+        min-height: auto;
+        padding: 40px 0;
+    }
+
+    .collage-container {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
+    .photo {
+        position: relative !important;
+        width: 100% !important;
+        height: 200px !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+    }
+
+    .photo-5 {
+        grid-column: span 2;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .text-card {
+        margin: 0 20px;
+        padding: 40px 30px;
+    }
+
+    .couple-names {
+        font-size: 2.8rem;
+    }
+
+    .date-text {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .page-container {
+        padding: 20px 10px;
+    }
+
+    .collage-container {
+        grid-template-columns: 1fr;
+    }
+
+    .photo {
+        height: 250px !important;
+    }
+
+    .photo-5 {
+        grid-column: span 1;
+    }
+
+    .text-card {
+        padding: 30px 20px;
+        clip-path: none;
+    }
+
+    .save-the-date-label {
+        font-size: 1.4rem;
+    }
+
+    .couple-names {
+        font-size: 2.2rem;
+    }
+
+    .date-text {
+        font-size: 1.2rem;
+    }
+
+    .location {
+        font-size: 1.1rem;
+    }
+
+    .countdown-timer {
+        gap: 15px;
+    }
+
+    .countdown-item {
+        padding: 15px 20px;
+        min-width: 70px;
+    }
+
+    .countdown-number {
+        font-size: 2rem;
+    }
+
+    .countdown-unit {
+        font-size: 0.75rem;
+    }
+
+    .calendar-btn {
+        font-size: 1.2rem;
+        padding: 15px 30px;
+    }
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.text-card {
+    animation: fadeIn 1s ease-out;
+}
+
+.photo {
+    animation: fadeIn 0.8s ease-out backwards;
+}
+
+.photo-1 { animation-delay: 0.1s; }
+.photo-2 { animation-delay: 0.2s; }
+.photo-3 { animation-delay: 0.3s; }
+.photo-4 { animation-delay: 0.4s; }
+.photo-5 { animation-delay: 0.5s; }
+
+.countdown-item {
+    animation: fadeIn 0.6s ease-out backwards;
+}
+
+.countdown-item:nth-child(1) { animation-delay: 0.6s; }
+.countdown-item:nth-child(2) { animation-delay: 0.7s; }
+.countdown-item:nth-child(3) { animation-delay: 0.8s; }
+.countdown-item:nth-child(4) { animation-delay: 0.9s; }

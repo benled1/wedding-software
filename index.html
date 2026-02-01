@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save the Date - [Your Names]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="page-container">
+        <!-- Paper Collage Hero -->
+        <section class="collage-hero">
+            <div class="collage-container">
+                <!-- Photos - replace src with your actual photos (jpg, png, or keep svg placeholders) -->
+                <div class="photo photo-1" data-rotation="-8">
+                    <img src="assets/images/photo1.svg" alt="Couple photo">
+                </div>
+                <div class="photo photo-2" data-rotation="5">
+                    <img src="assets/images/photo2.svg" alt="Couple photo">
+                </div>
+                <div class="photo photo-3" data-rotation="-3">
+                    <img src="assets/images/photo3.svg" alt="Couple photo">
+                </div>
+                <div class="photo photo-4" data-rotation="7">
+                    <img src="assets/images/photo4.svg" alt="Couple photo">
+                </div>
+                <div class="photo photo-5" data-rotation="-5">
+                    <img src="assets/images/photo5.svg" alt="Couple photo">
+                </div>
+            </div>
+
+            <!-- Text Card Overlay -->
+            <div class="text-card">
+                <p class="save-the-date-label">Save the Date</p>
+                <h1 class="couple-names">Sarah & Michael</h1>
+                <div class="wedding-date">
+                    <span class="date-text">September 14, 2025</span>
+                </div>
+                <p class="location">Napa Valley, California</p>
+            </div>
+        </section>
+
+        <!-- Countdown Section -->
+        <section class="countdown-section">
+            <h2 class="countdown-label">Counting down to our special day</h2>
+            <div class="countdown-timer" id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">000</span>
+                    <span class="countdown-unit">days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-unit">hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-unit">minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-unit">seconds</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add to Calendar -->
+        <section class="calendar-section">
+            <button class="calendar-btn" id="calendarBtn">
+                <span class="calendar-icon">📅</span>
+                Add to Calendar
+            </button>
+            <div class="calendar-dropdown" id="calendarDropdown">
+                <a href="#" id="googleCal" class="calendar-option">Google Calendar</a>
+                <a href="#" id="appleCal" class="calendar-option">Apple Calendar</a>
+                <a href="#" id="outlookCal" class="calendar-option">Outlook</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="formal-invite">Formal invitation to follow</p>
+            <p class="hashtag">#SarahAndMichael2025</p>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
