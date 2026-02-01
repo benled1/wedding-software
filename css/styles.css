@@ -1,24 +1,29 @@
 /* ==========================================================================
-   Save the Date - Paper Collage Style
+   Save the Date - Scrappy Magazine Collage Style
    ========================================================================== */
 
 /* CSS Variables for easy customization */
 :root {
     /* Colors */
-    --paper-bg: #f5f0e6;
-    --paper-light: #faf8f3;
-    --text-dark: #3d3830;
-    --text-muted: #6b6459;
-    --accent-gold: #c4a86b;
-    --shadow-color: rgba(61, 56, 48, 0.25);
+    --paper-bg: #e8e4dc;
+    --paper-light: #f7f5f0;
+    --paper-kraft: #c9b99a;
+    --text-dark: #2d2a26;
+    --text-muted: #5a554d;
+    --accent-coral: #e07860;
+    --accent-mustard: #d4a847;
+    --accent-sage: #8fa882;
+    --washi-pink: rgba(232, 180, 180, 0.7);
+    --washi-blue: rgba(173, 198, 214, 0.7);
+    --washi-yellow: rgba(240, 220, 160, 0.7);
+    --shadow-color: rgba(45, 42, 38, 0.3);
 
     /* Fonts */
     --font-handwritten: 'Caveat', cursive;
     --font-elegant: 'Cormorant Garamond', serif;
 
     /* Photo styling */
-    --photo-border: 8px;
-    --photo-shadow: 0 4px 20px var(--shadow-color);
+    --photo-border: 0;
 }
 
 /* Reset & Base Styles */
@@ -38,15 +43,10 @@ body {
     color: var(--text-dark);
     min-height: 100vh;
     line-height: 1.6;
-
-    /* Paper texture background - replace with jpg/png for better texture */
-    background-image: url('../assets/textures/paper-bg.svg');
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
+    overflow-x: hidden;
 }
 
-/* Fallback grain texture if no image */
+/* Kraft paper texture background */
 body::before {
     content: '';
     position: fixed;
@@ -55,8 +55,35 @@ body::before {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0,0,0,0.01) 2px,
+            rgba(0,0,0,0.01) 4px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(0,0,0,0.01) 2px,
+            rgba(0,0,0,0.01) 4px
+        );
+    opacity: 0.5;
+}
+
+/* Paper grain overlay */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.08;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
 .page-container {
@@ -67,12 +94,61 @@ body::before {
 }
 
 /* ==========================================================================
+   Bird Decorations
+   ========================================================================== */
+
+.bird {
+    position: absolute;
+    pointer-events: none;
+    z-index: 60;
+}
+
+.bird-1 {
+    top: 8%;
+    left: 12%;
+    font-size: 2.5rem;
+    transform: rotate(-15deg);
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2));
+}
+
+.bird-2 {
+    top: 15%;
+    right: 8%;
+    font-size: 2rem;
+    transform: rotate(10deg) scaleX(-1);
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2));
+}
+
+.bird-3 {
+    bottom: 20%;
+    left: 8%;
+    font-size: 1.8rem;
+    transform: rotate(-5deg);
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2));
+}
+
+.bird-4 {
+    bottom: 25%;
+    right: 12%;
+    font-size: 2.2rem;
+    transform: rotate(8deg) scaleX(-1);
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2));
+}
+
+/* Bird doodle style - hand drawn look */
+.bird-doodle {
+    font-family: var(--font-handwritten);
+    color: var(--text-muted);
+    opacity: 0.6;
+}
+
+/* ==========================================================================
    Collage Hero Section
    ========================================================================== */
 
 .collage-hero {
     position: relative;
-    min-height: 80vh;
+    min-height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -87,25 +163,27 @@ body::before {
     left: 0;
 }
 
-/* Base Photo Styles */
+/* ==========================================================================
+   Ripped Magazine Photo Styles
+   ========================================================================== */
+
 .photo {
     position: absolute;
-    background: var(--paper-light);
-    padding: var(--photo-border);
-    box-shadow: var(--photo-shadow);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    background: transparent;
+    transition: transform 0.4s ease, filter 0.4s ease;
     cursor: pointer;
-}
-
-.photo::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 1px solid rgba(0,0,0,0.05);
-    pointer-events: none;
+    /* Torn paper edge - irregular polygon */
+    clip-path: polygon(
+        2% 4%, 8% 1%, 15% 3%, 22% 0%, 30% 2%, 38% 1%, 45% 4%, 52% 0%,
+        60% 3%, 68% 1%, 75% 2%, 82% 0%, 90% 3%, 96% 1%, 100% 5%,
+        98% 12%, 100% 20%, 97% 28%, 100% 36%, 98% 45%, 100% 54%,
+        97% 62%, 100% 70%, 98% 78%, 100% 86%, 97% 94%, 100% 100%,
+        95% 97%, 88% 100%, 80% 96%, 72% 100%, 64% 97%, 56% 100%,
+        48% 96%, 40% 100%, 32% 97%, 24% 100%, 16% 96%, 8% 100%, 0% 97%,
+        3% 90%, 0% 82%, 2% 74%, 0% 66%, 3% 58%, 0% 50%,
+        2% 42%, 0% 34%, 3% 26%, 0% 18%, 2% 10%
+    );
+    filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.3));
 }
 
 .photo img {
@@ -113,132 +191,230 @@ body::before {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* Slight vintage/magazine print feel */
+    filter: contrast(1.05) saturate(0.95);
 }
 
 .photo:hover {
-    transform: scale(1.05) rotate(0deg) !important;
-    box-shadow: 0 8px 40px var(--shadow-color);
+    transform: scale(1.08) rotate(0deg) !important;
+    filter: drop-shadow(8px 12px 16px rgba(0,0,0,0.4));
     z-index: 100;
 }
 
-/* Individual Photo Positions - Desktop */
-.photo-1 {
-    width: 280px;
-    height: 350px;
-    top: 5%;
-    left: 5%;
-    transform: rotate(-8deg);
-    z-index: 1;
+/* Washi tape strips on photos */
+.photo::before {
+    content: '';
+    position: absolute;
+    width: 70px;
+    height: 22px;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    z-index: 10;
+    opacity: 0.85;
 }
 
-.photo-2 {
-    width: 240px;
-    height: 300px;
-    top: 10%;
-    right: 10%;
-    transform: rotate(5deg);
-    z-index: 2;
+.photo-1::before {
+    background: var(--washi-pink);
+    width: 80px;
+    transform: translateX(-50%) rotate(5deg);
 }
 
-.photo-3 {
-    width: 260px;
-    height: 320px;
-    bottom: 15%;
-    left: 15%;
-    transform: rotate(-3deg);
-    z-index: 3;
+.photo-2::before {
+    background: var(--washi-blue);
+    transform: translateX(-50%) rotate(-7deg);
 }
 
-.photo-4 {
-    width: 220px;
-    height: 280px;
-    bottom: 10%;
-    right: 5%;
-    transform: rotate(7deg);
-    z-index: 2;
+.photo-3::before {
+    background: var(--washi-yellow);
+    width: 75px;
+    transform: translateX(-50%) rotate(2deg);
 }
 
-.photo-5 {
-    width: 200px;
-    height: 250px;
-    top: 35%;
-    left: 45%;
-    transform: rotate(-5deg) translateX(-50%);
-    z-index: 1;
+.photo-4::before {
+    background: var(--washi-pink);
+    transform: translateX(-50%) rotate(-4deg);
 }
 
-/* Optional: Tape strips decoration */
-.photo.with-tape::after {
+.photo-5::before {
+    background: var(--washi-blue);
+    width: 85px;
+    transform: translateX(-50%) rotate(6deg);
+}
+
+/* Second tape strip for some photos */
+.photo-1::after,
+.photo-3::after {
     content: '';
     position: absolute;
     width: 60px;
     height: 20px;
-    background: rgba(255, 248, 220, 0.7);
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%) rotate(-2deg);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    bottom: -6px;
+    right: 10%;
+    z-index: 10;
+    opacity: 0.8;
+    transform: rotate(8deg);
+}
+
+.photo-1::after {
+    background: var(--washi-yellow);
+}
+
+.photo-3::after {
+    background: var(--washi-pink);
+    transform: rotate(-5deg);
+}
+
+/* Individual Photo Positions - Desktop */
+.photo-1 {
+    width: 260px;
+    height: 340px;
+    top: 3%;
+    left: 4%;
+    transform: rotate(-12deg);
+    z-index: 2;
+}
+
+.photo-2 {
+    width: 230px;
+    height: 290px;
+    top: 8%;
+    right: 8%;
+    transform: rotate(8deg);
+    z-index: 3;
+}
+
+.photo-3 {
+    width: 250px;
+    height: 310px;
+    bottom: 12%;
+    left: 12%;
+    transform: rotate(5deg);
+    z-index: 2;
+}
+
+.photo-4 {
+    width: 210px;
+    height: 270px;
+    bottom: 8%;
+    right: 4%;
+    transform: rotate(-9deg);
+    z-index: 1;
+}
+
+.photo-5 {
+    width: 190px;
+    height: 240px;
+    top: 40%;
+    left: 48%;
+    transform: rotate(3deg) translateX(-50%);
+    z-index: 1;
 }
 
 /* ==========================================================================
-   Text Card Overlay
+   Text Card Overlay - Ripped Paper Style
    ========================================================================== */
 
 .text-card {
     position: relative;
     z-index: 50;
-    background: rgba(250, 248, 243, 0.95);
-    padding: 50px 60px;
+    background: var(--paper-light);
+    padding: 45px 55px;
     text-align: center;
-    box-shadow: 0 10px 50px var(--shadow-color);
-    max-width: 500px;
-
-    /* Torn paper edge effect */
+    max-width: 480px;
+    /* More aggressive torn edges */
     clip-path: polygon(
-        0% 2%, 3% 0%, 7% 1%, 12% 0%, 18% 2%, 25% 0%, 32% 1%,
-        40% 0%, 48% 2%, 55% 0%, 62% 1%, 70% 0%, 78% 2%, 85% 0%,
-        92% 1%, 97% 0%, 100% 2%, 100% 98%, 97% 100%, 92% 99%,
-        85% 100%, 78% 98%, 70% 100%, 62% 99%, 55% 100%, 48% 98%,
-        40% 100%, 32% 99%, 25% 100%, 18% 98%, 12% 100%, 7% 99%,
-        3% 100%, 0% 98%
+        0% 5%, 5% 2%, 10% 6%, 15% 0%, 20% 4%, 26% 1%, 32% 5%, 38% 0%,
+        44% 3%, 50% 0%, 56% 4%, 62% 1%, 68% 5%, 74% 0%, 80% 3%, 86% 0%,
+        92% 4%, 97% 1%, 100% 6%,
+        98% 14%, 100% 22%, 97% 30%, 100% 38%, 98% 46%, 100% 54%,
+        97% 62%, 100% 70%, 98% 78%, 100% 86%, 97% 94%,
+        100% 100%, 94% 96%, 88% 100%, 82% 95%, 76% 100%, 70% 96%,
+        64% 100%, 58% 95%, 52% 100%, 46% 96%, 40% 100%, 34% 95%,
+        28% 100%, 22% 96%, 16% 100%, 10% 95%, 4% 100%, 0% 96%,
+        2% 88%, 0% 80%, 3% 72%, 0% 64%, 2% 56%, 0% 48%,
+        3% 40%, 0% 32%, 2% 24%, 0% 16%, 3% 8%
     );
+    filter: drop-shadow(5px 8px 15px rgba(0,0,0,0.25));
+}
+
+/* Decorative washi tape on card corners */
+.text-card::before {
+    content: '';
+    position: absolute;
+    width: 90px;
+    height: 24px;
+    top: 15px;
+    left: -20px;
+    background: var(--washi-yellow);
+    transform: rotate(-35deg);
+    opacity: 0.8;
+    z-index: -1;
+}
+
+.text-card::after {
+    content: '';
+    position: absolute;
+    width: 85px;
+    height: 22px;
+    bottom: 20px;
+    right: -15px;
+    background: var(--washi-pink);
+    transform: rotate(30deg);
+    opacity: 0.8;
+    z-index: -1;
 }
 
 .save-the-date-label {
     font-family: var(--font-handwritten);
-    font-size: 1.8rem;
-    color: var(--accent-gold);
-    margin-bottom: 10px;
-    letter-spacing: 2px;
+    font-size: 1.6rem;
+    color: var(--accent-coral);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+    transform: rotate(-2deg);
 }
 
 .couple-names {
     font-family: var(--font-handwritten);
-    font-size: 4rem;
-    font-weight: 600;
+    font-size: 3.8rem;
+    font-weight: 700;
     color: var(--text-dark);
-    margin-bottom: 20px;
-    line-height: 1.1;
+    margin-bottom: 15px;
+    line-height: 1;
+    transform: rotate(1deg);
 }
 
 .wedding-date {
-    margin: 25px 0;
+    margin: 20px 0;
+    position: relative;
+}
+
+/* Underline doodle under date */
+.wedding-date::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 3px;
+    background: var(--accent-mustard);
+    border-radius: 2px;
 }
 
 .date-text {
-    font-family: var(--font-elegant);
-    font-size: 1.8rem;
+    font-family: var(--font-handwritten);
+    font-size: 2rem;
     font-weight: 600;
     color: var(--text-dark);
-    letter-spacing: 3px;
-    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .location {
-    font-family: var(--font-elegant);
-    font-size: 1.3rem;
-    font-style: italic;
+    font-family: var(--font-handwritten);
+    font-size: 1.4rem;
     color: var(--text-muted);
+    margin-top: 15px;
 }
 
 /* ==========================================================================
@@ -247,48 +423,67 @@ body::before {
 
 .countdown-section {
     text-align: center;
-    padding: 60px 20px;
-    margin-top: 40px;
+    padding: 50px 20px;
+    margin-top: 30px;
+    position: relative;
+}
+
+/* Bird decoration near countdown */
+.countdown-section::before {
+    content: '🐦';
+    position: absolute;
+    top: 10px;
+    right: 15%;
+    font-size: 1.5rem;
+    transform: rotate(-10deg);
+    opacity: 0.7;
 }
 
 .countdown-label {
     font-family: var(--font-handwritten);
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: var(--text-muted);
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    transform: rotate(-1deg);
 }
 
 .countdown-timer {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 20px;
     flex-wrap: wrap;
 }
 
 .countdown-item {
     background: var(--paper-light);
-    padding: 25px 30px;
-    min-width: 100px;
-    box-shadow: 0 4px 15px var(--shadow-color);
-    transform: rotate(-1deg);
+    padding: 20px 25px;
+    min-width: 90px;
+    /* Torn paper edges on countdown items */
+    clip-path: polygon(
+        5% 0%, 15% 3%, 25% 0%, 35% 2%, 45% 0%, 55% 3%, 65% 0%, 75% 2%, 85% 0%, 95% 3%, 100% 0%,
+        100% 100%, 95% 97%, 85% 100%, 75% 98%, 65% 100%, 55% 97%, 45% 100%, 35% 98%, 25% 100%, 15% 97%, 5% 100%, 0% 97%,
+        0% 0%
+    );
+    filter: drop-shadow(3px 4px 6px rgba(0,0,0,0.2));
+    transform: rotate(-2deg);
 }
 
 .countdown-item:nth-child(2) {
-    transform: rotate(1deg);
+    transform: rotate(2deg);
 }
 
 .countdown-item:nth-child(3) {
-    transform: rotate(-0.5deg);
+    transform: rotate(-1deg);
 }
 
 .countdown-item:nth-child(4) {
-    transform: rotate(0.8deg);
+    transform: rotate(1.5deg);
 }
 
 .countdown-number {
     display: block;
     font-family: var(--font-handwritten);
-    font-size: 3rem;
+    font-size: 2.8rem;
     font-weight: 700;
     color: var(--text-dark);
     line-height: 1;
@@ -296,12 +491,10 @@ body::before {
 
 .countdown-unit {
     display: block;
-    font-family: var(--font-elegant);
-    font-size: 0.9rem;
+    font-family: var(--font-handwritten);
+    font-size: 1rem;
     color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 8px;
+    margin-top: 5px;
 }
 
 /* ==========================================================================
@@ -310,33 +503,39 @@ body::before {
 
 .calendar-section {
     text-align: center;
-    padding: 40px 20px;
+    padding: 30px 20px;
     position: relative;
 }
 
 .calendar-btn {
     font-family: var(--font-handwritten);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     background: var(--paper-light);
     border: none;
-    padding: 18px 40px;
+    padding: 16px 35px;
     cursor: pointer;
-    box-shadow: 0 4px 15px var(--shadow-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, filter 0.3s ease;
     display: inline-flex;
     align-items: center;
     gap: 10px;
     color: var(--text-dark);
-    transform: rotate(-1deg);
+    transform: rotate(-2deg);
+    /* Torn edges */
+    clip-path: polygon(
+        3% 0%, 12% 4%, 22% 0%, 32% 3%, 42% 0%, 52% 4%, 62% 0%, 72% 3%, 82% 0%, 92% 4%, 100% 0%,
+        100% 100%, 92% 96%, 82% 100%, 72% 97%, 62% 100%, 52% 96%, 42% 100%, 32% 97%, 22% 100%, 12% 96%, 3% 100%, 0% 96%,
+        0% 0%
+    );
+    filter: drop-shadow(3px 4px 8px rgba(0,0,0,0.2));
 }
 
 .calendar-btn:hover {
     transform: rotate(0deg) translateY(-3px);
-    box-shadow: 0 8px 25px var(--shadow-color);
+    filter: drop-shadow(5px 8px 12px rgba(0,0,0,0.25));
 }
 
 .calendar-icon {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
 }
 
 .calendar-dropdown {
@@ -345,12 +544,16 @@ body::before {
     left: 50%;
     transform: translateX(-50%);
     background: var(--paper-light);
-    box-shadow: 0 4px 20px var(--shadow-color);
     display: none;
     flex-direction: column;
     min-width: 200px;
     z-index: 100;
     margin-top: 10px;
+    clip-path: polygon(
+        0% 5%, 5% 0%, 95% 0%, 100% 5%,
+        100% 95%, 95% 100%, 5% 100%, 0% 95%
+    );
+    filter: drop-shadow(3px 5px 10px rgba(0,0,0,0.2));
 }
 
 .calendar-dropdown.active {
@@ -358,13 +561,13 @@ body::before {
 }
 
 .calendar-option {
-    font-family: var(--font-elegant);
-    font-size: 1.1rem;
-    padding: 15px 25px;
+    font-family: var(--font-handwritten);
+    font-size: 1.2rem;
+    padding: 14px 22px;
     color: var(--text-dark);
     text-decoration: none;
     transition: background 0.2s ease;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-bottom: 1px dashed rgba(0,0,0,0.1);
 }
 
 .calendar-option:last-child {
@@ -372,7 +575,7 @@ body::before {
 }
 
 .calendar-option:hover {
-    background: rgba(196, 168, 107, 0.1);
+    background: var(--washi-yellow);
 }
 
 /* ==========================================================================
@@ -381,22 +584,43 @@ body::before {
 
 .footer {
     text-align: center;
-    padding: 60px 20px;
-    margin-top: 40px;
+    padding: 50px 20px;
+    margin-top: 30px;
+    position: relative;
+}
+
+/* Bird decorations in footer */
+.footer::before {
+    content: '🕊️';
+    position: absolute;
+    top: 20px;
+    left: 20%;
+    font-size: 1.8rem;
+    transform: rotate(-5deg);
+    opacity: 0.6;
+}
+
+.footer::after {
+    content: '🕊️';
+    position: absolute;
+    top: 15px;
+    right: 22%;
+    font-size: 1.6rem;
+    transform: rotate(8deg) scaleX(-1);
+    opacity: 0.6;
 }
 
 .formal-invite {
-    font-family: var(--font-elegant);
-    font-size: 1.2rem;
-    font-style: italic;
+    font-family: var(--font-handwritten);
+    font-size: 1.4rem;
     color: var(--text-muted);
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .hashtag {
     font-family: var(--font-handwritten);
-    font-size: 1.8rem;
-    color: var(--accent-gold);
+    font-size: 1.6rem;
+    color: var(--accent-coral);
 }
 
 /* ==========================================================================
@@ -406,72 +630,85 @@ body::before {
 @media (max-width: 900px) {
     .collage-hero {
         min-height: auto;
-        padding: 40px 0;
+        padding: 30px 0;
+        flex-direction: column;
     }
 
     .collage-container {
         position: relative;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+        gap: 25px;
         padding: 20px;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
     }
 
     .photo {
         position: relative !important;
         width: 100% !important;
-        height: 200px !important;
+        height: 180px !important;
         top: auto !important;
         left: auto !important;
         right: auto !important;
         bottom: auto !important;
     }
 
+    .photo-1 { transform: rotate(-5deg); }
+    .photo-2 { transform: rotate(4deg); }
+    .photo-3 { transform: rotate(3deg); }
+    .photo-4 { transform: rotate(-4deg); }
+
     .photo-5 {
         grid-column: span 2;
-        max-width: 300px;
+        max-width: 250px;
+        height: 200px !important;
         margin: 0 auto;
+        transform: rotate(-2deg);
     }
 
     .text-card {
-        margin: 0 20px;
-        padding: 40px 30px;
+        margin: 0 15px;
+        padding: 35px 25px;
     }
 
     .couple-names {
-        font-size: 2.8rem;
+        font-size: 2.6rem;
     }
 
     .date-text {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
+    }
+
+    .bird-1, .bird-2, .bird-3, .bird-4 {
+        display: none;
     }
 }
 
 @media (max-width: 600px) {
     .page-container {
-        padding: 20px 10px;
+        padding: 15px 10px;
     }
 
     .collage-container {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
 
     .photo {
-        height: 250px !important;
+        height: 220px !important;
     }
 
     .photo-5 {
         grid-column: span 1;
+        max-width: 100%;
     }
 
     .text-card {
         padding: 30px 20px;
-        clip-path: none;
     }
 
     .save-the-date-label {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
     }
 
     .couple-names {
@@ -479,19 +716,19 @@ body::before {
     }
 
     .date-text {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
     }
 
     .location {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 
     .countdown-timer {
-        gap: 15px;
+        gap: 12px;
     }
 
     .countdown-item {
-        padding: 15px 20px;
+        padding: 15px 18px;
         min-width: 70px;
     }
 
@@ -500,12 +737,17 @@ body::before {
     }
 
     .countdown-unit {
-        font-size: 0.75rem;
+        font-size: 0.85rem;
     }
 
     .calendar-btn {
         font-size: 1.2rem;
-        padding: 15px 30px;
+        padding: 14px 28px;
+    }
+
+    .footer::before,
+    .footer::after {
+        font-size: 1.3rem;
     }
 }
 
@@ -513,36 +755,48 @@ body::before {
    Animations
    ========================================================================== */
 
-@keyframes fadeIn {
+@keyframes fadeInScatter {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px) rotate(0deg);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
     }
 }
 
+@keyframes flutter {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-5px) rotate(5deg); }
+}
+
 .text-card {
-    animation: fadeIn 1s ease-out;
+    animation: fadeInScatter 0.8s ease-out;
 }
 
 .photo {
-    animation: fadeIn 0.8s ease-out backwards;
+    animation: fadeInScatter 0.6s ease-out backwards;
 }
 
 .photo-1 { animation-delay: 0.1s; }
-.photo-2 { animation-delay: 0.2s; }
-.photo-3 { animation-delay: 0.3s; }
-.photo-4 { animation-delay: 0.4s; }
-.photo-5 { animation-delay: 0.5s; }
+.photo-2 { animation-delay: 0.15s; }
+.photo-3 { animation-delay: 0.2s; }
+.photo-4 { animation-delay: 0.25s; }
+.photo-5 { animation-delay: 0.3s; }
 
 .countdown-item {
-    animation: fadeIn 0.6s ease-out backwards;
+    animation: fadeInScatter 0.5s ease-out backwards;
 }
 
-.countdown-item:nth-child(1) { animation-delay: 0.6s; }
-.countdown-item:nth-child(2) { animation-delay: 0.7s; }
-.countdown-item:nth-child(3) { animation-delay: 0.8s; }
-.countdown-item:nth-child(4) { animation-delay: 0.9s; }
+.countdown-item:nth-child(1) { animation-delay: 0.4s; }
+.countdown-item:nth-child(2) { animation-delay: 0.45s; }
+.countdown-item:nth-child(3) { animation-delay: 0.5s; }
+.countdown-item:nth-child(4) { animation-delay: 0.55s; }
+
+.bird {
+    animation: flutter 3s ease-in-out infinite;
+}
+
+.bird-2 { animation-delay: 0.5s; }
+.bird-3 { animation-delay: 1s; }
+.bird-4 { animation-delay: 1.5s; }

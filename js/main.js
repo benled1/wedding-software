@@ -9,12 +9,12 @@
 
 const CONFIG = {
     // Wedding date and time (format: 'YYYY-MM-DDTHH:MM:SS')
-    weddingDate: '2025-09-14T16:00:00',
+    weddingDate: '2026-08-29T16:00:00',
 
     // Event details for calendar
     event: {
-        title: 'Sarah & Michael\'s Wedding',
-        location: 'Napa Valley, California',
+        title: 'Tea & Ben\'s Wedding',
+        location: 'Langley, British Columbia',
         description: 'We\'re getting married! More details to follow.',
         duration: 6 // hours
     }
