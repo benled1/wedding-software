@@ -489,11 +489,16 @@ body {
     .photo {
         position: relative !important;
         width: 100% !important;
-        height: 180px !important;
+        height: auto !important;
         top: auto !important;
         left: auto !important;
         right: auto !important;
         bottom: auto !important;
+    }
+
+    .photo img {
+        height: auto;
+        object-fit: unset;
     }
 
     .photo-1 { transform: rotate(-5deg); }
@@ -535,7 +540,7 @@ body {
     }
 
     .photo {
-        height: 220px !important;
+        height: auto !important;
     }
 
     .photo-5 {
