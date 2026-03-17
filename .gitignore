@@ -22,3 +22,7 @@ node_modules/
 # Temporary files
 *.tmp
 *.temp
+
+# Email sender credentials and logs
+scripts/email-sender/.env
+scripts/email-sender/sent_log.txt

@@ -510,6 +510,7 @@ body {
     }
 
     .text-card {
+        order: -1;
         margin: 0 15px;
         padding: 35px 25px;
     }
